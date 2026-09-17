@@ -1,0 +1,12 @@
+# Ignore large video files (keep on disk, exclude from Git history)
+media/videos/*.mp4
+media/videos/*.mkv
+media/videos/*.avi
+*.mp4
+*.mkv
+*.avi
+
+# OS metadata and cache
+Thumbs.db
+ehthumbs.db
+.DS_Store
