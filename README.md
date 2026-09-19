@@ -42,7 +42,7 @@ $$V_{dc,raw} = \frac{2 V_m}{\pi} \approx 0.636 V_m$$
 ### 3. Capacitive Peak-to-Peak Ripple Voltage
 When the capacitor is added, it discharges into the load between peaks. The peak-to-peak ripple voltage $V_{r(p-p)}$ is derived as:
 $$V_{r(p-p)} = \frac{I_{dc}}{2 f C} = \frac{V_{dc}}{2 f R_L C}$$
-*(Note: $2f = 100\text{Hz}$ for a $50\text{Hz}$ grid, since the bridge rectifies both half-cycles).*
+*(Note: $2f = 100\text{Hz}$for a$50\text{Hz}$ grid, since the bridge rectifies both half-cycles).*
 
 ### 4. Filtered DC Output Approximation
 The practical DC output voltage under load becomes:
@@ -77,7 +77,7 @@ $$\text{PIV} \ge V_m$$
 ## Laboratory Testing & Waveform Analysis
 The physical prototype was verified using an oscilloscope. The testing phases consisted of:
 1. **Unfiltered Observation**: Probing the output of the diode bridge without the capacitor installed. The trace reveals a raw, pulsating $100\text{Hz}$ DC wave touching 0V every 10ms.
-2. **Capacitive Filtering**: Upon inserting the bulk electrolytic capacitor in parallel with the load, the oscilloscope trace flattens, demonstrating the theoretical $V_{dc,filtered}$ with a small triangular ripple $V_{r(p-p)}$ riding on top as the capacitor discharges into the load resistor between AC cycles.
+2. **Capacitive Filtering**: Upon inserting the bulk electrolytic capacitor in parallel with the load, the oscilloscope trace flattens, demonstrating the theoretical $V_{dc,filtered}$with a small triangular ripple$V_{r(p-p)}$ riding on top as the capacitor discharges into the load resistor between AC cycles.
 
 ## Authentic Media Catalog
 - **Engineering Report**: [`docs/Conversion from  (AC) to (DC)حسن  مقبل .pdf`](docs/)
@@ -85,7 +85,7 @@ The physical prototype was verified using an oscilloscope. The testing phases co
 - **Bench Test Videos**: Original video clips (up to 85MB) are preserved locally in `media/videos/` as `[ORIGINAL HARDWARE TEST VIDEOS]`.
 
 ## Engineering Audit & Design Tradeoffs
-- **Full-Wave Bridge vs. Center-Tapped Transformer**: This design utilizes a 4-diode bridge rather than a 2-diode center-tapped transformer. The bridge topology requires a cheaper, simpler transformer with only two secondary wire leads and allows for a diode PIV rating of only $V_m$ (instead of $2V_m$). The tradeoff is a higher forward voltage drop ($1.4\text{V}$ vs $0.7\text{V}$), slightly reducing the final $V_{peak}$.
+- **Full-Wave Bridge vs. Center-Tapped Transformer**: This design utilizes a 4-diode bridge rather than a 2-diode center-tapped transformer. The bridge topology requires a cheaper, simpler transformer with only two secondary wire leads and allows for a diode PIV rating of only $V_m$(instead of$2V_m$). The tradeoff is a higher forward voltage drop ($1.4\text{V}$vs$0.7\text{V}$), slightly reducing the final$V_{peak}$.
 - **Passive Filtering vs. Active Regulation**: This project stops at passive capacitive filtering. While acceptable for basic DC motors or resistive heating elements, the output voltage will sag under heavy load variations and grid fluctuations. For sensitive electronics, an active Linear Regulator (e.g., LM317 or 7812) or SMPS topology must be cascaded after this filtering stage.
 
 ---
