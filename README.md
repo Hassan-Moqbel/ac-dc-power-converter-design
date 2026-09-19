@@ -88,7 +88,7 @@ The physical prototype was verified using an oscilloscope. The testing phases co
 - **Bench Test Videos**: Original video clips (up to 85MB) are preserved locally in `media/videos/` as `[ORIGINAL HARDWARE TEST VIDEOS]`.
 
 ## Engineering Audit & Design Tradeoffs
-- **Full-Wave Bridge vs. Center-Tapped Transformer**: This design utilizes a 4-diode bridge rather than a 2-diode center-tapped transformer. The bridge topology requires a cheaper, simpler transformer with only two secondary wire leads and allows for a diode PIV rating of only $V_m$ (instead of $V_{	ext{PIV}} = 2V_m$). The tradeoff is a higher forward voltage drop ($2V_D pprox 1.4	ext{ V}$ vs. $V_D pprox 0.7	ext{ V}$), slightly reducing the final $V_{	ext{peak}}$.
+- **Full-Wave Bridge vs. Center-Tapped Transformer**: This design utilizes a 4-diode bridge rather than a 2-diode center-tapped transformer. The bridge topology requires a cheaper, simpler transformer with only two secondary wire leads and allows for a diode PIV rating of only $V_m$ (instead of $V_{\text{PIV}} = 2V_m$). The tradeoff is a higher forward voltage drop ($2V_D \approx 1.4\text{ V}$ vs. $V_D \approx 0.7\text{ V}$), slightly reducing the final $V_{\text{peak}}$.
 - **Passive Filtering vs. Active Regulation**: This project stops at passive capacitive filtering. While acceptable for basic DC motors or resistive heating elements, the output voltage will sag under heavy load variations and grid fluctuations. For sensitive electronics, an active Linear Regulator (e.g., LM317 or 7812) or SMPS topology must be cascaded after this filtering stage.
 
 ---
