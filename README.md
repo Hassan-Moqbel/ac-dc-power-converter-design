@@ -39,7 +39,7 @@ $$
 V_{\text{peak}} = \sqrt{2} V_{\text{rms}} - 2V_D
 $$
 
-*(where $V_D \approx 0.7\text{ V}$)*
+where $V_D \approx 0.7\text{ V}$
 
 ### 2. Average Unfiltered DC Voltage
 
@@ -57,7 +57,7 @@ $$
 V_{r(p-p)} = \frac{I_{\text{dc}}}{2 f C} = \frac{V_{\text{dc}}}{2 f R_L C}
 $$
 
-*(Note: For a mains frequency $f_{\text{grid}} = 50\text{ Hz}$, the full-wave ripple frequency is $2f = 100\text{ Hz}$).*
+**Note:** For a mains frequency $f_{\text{grid}} = 50\text{ Hz}$, the full-wave ripple frequency is $2f = 100\text{ Hz}$.
 
 ### 4. Filtered DC Output Approximation
 
@@ -83,7 +83,7 @@ The physical prototype was verified using an oscilloscope. The testing phases co
 2. **Capacitive Filtering**: Upon inserting the bulk electrolytic capacitor in parallel with the load, the oscilloscope trace flattens, demonstrating the theoretical $V_{\text{dc,filtered}}$ with a small triangular ripple $V_{r(p-p)}$ riding on top as the capacitor discharges into the load resistor between AC cycles.
 
 ## Authentic Media Catalog
-- **Engineering Report**: [`docs/Conversion from  (AC) to (DC)حسن  مقبل .pdf`](docs/)
+- **Engineering Report**: [`docs/AC_to_DC_Power_Converter_Report.pdf`](docs/)
 - **Oscilloscope & Breadboard Media**: See `media/photos/` for original `[ORIGINAL HARDWARE & WAVEFORM ARTIFACTS]`.
 - **Bench Test Videos**: Original video clips (up to 85MB) are preserved locally in `media/videos/` as `[ORIGINAL HARDWARE TEST VIDEOS]`.
 
