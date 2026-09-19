@@ -21,47 +21,47 @@ The foundational step in almost all modern electronic power supplies is the effi
 
 ## System Architecture Diagram
 
-mermaid
+```mermaid
 flowchart LR
     AC["Mains AC 220V/50Hz"] -->|Isolation| XFMR["Step-Down Transformer"]
     XFMR -->|Secondary AC Sine| BRIDGE["Full-Wave Rectifier \n4x 1N4007"]
     BRIDGE -->|100Hz Pulsating DC| FILTER["Electrolytic Smoothing Reservoir"]
     FILTER -->|Ripple DC Bus| LOAD["Resistive Load / R_L"]
-
+```
 
 ## Theoretical & Mathematical Models
 
 ### 1. Peak Secondary Voltage & Diode Drops
 Because two silicon diodes conduct during every half cycle in a bridge configuration, the theoretical peak DC voltage reaching the filter capacitor is:
-$$V_{"peak"} = \sqrt{"2"} V_{"rms"} - 2 V_D \quad (\text{"where "} V_D \approx 0.7\text{"V"})$$
+$$V_{peak} = \sqrt{2} V_{rms} - 2 V_D \quad (\text{where } V_D \approx 0.7\text{V})$$
 
 ### 2. Average Unfiltered DC Voltage
 Without the smoothing capacitor, the average output voltage of the full-wave rectified sine wave is:
-$$V_{"dc,raw"} = \frac{"2 V_m"}{\pi} \approx 0.636 V_m$$
+$$V_{dc,raw} = \frac{2 V_m}{\pi} \approx 0.636 V_m$$
 
 ### 3. Capacitive Peak-to-Peak Ripple Voltage
-When the capacitor is added, it discharges into the load between peaks. The peak-to-peak ripple voltage $V_{"r(p-p)"}$ is derived as:
-$$V_{"r(p-p)"} = \frac{"I_{dc"}}{2 f C} = \frac{"V_{dc"}}{2 f R_L C}$$
-*(Note: $2f = 100\text{"Hz"}$ for a $50\text{"Hz"}$ grid, since the bridge rectifies both half-cycles).*
+When the capacitor is added, it discharges into the load between peaks. The peak-to-peak ripple voltage $V_{r(p-p)}$ is derived as:
+$$V_{r(p-p)} = \frac{I_{dc}}{2 f C} = \frac{V_{dc}}{2 f R_L C}$$
+*(Note: $2f = 100\text{Hz}$ for a $50\text{Hz}$ grid, since the bridge rectifies both half-cycles).*
 
 ### 4. Filtered DC Output Approximation
 The practical DC output voltage under load becomes:
-$$V_{"dc,filtered"} \approx V_{"peak"} - \frac{"V_{r(p-p)"}}{2}$$
+$$V_{dc,filtered} \approx V_{peak} - \frac{V_{r(p-p)}}{2}$$
 
 ### 5. Ripple Factor
 The ripple factor ($\gamma$), which measures the purity of the DC output, is approximated by:
-$$\gamma = \frac{"V_{r(rms)"}}{V_{"dc"}} \approx \frac{"1"}{4 \sqrt{"3"} f C R_L}$$
+$$\gamma = \frac{V_{r(rms)}}{V_{dc}} \approx \frac{1}{4 \sqrt{3} f C R_L}$$
 
 ### 6. Peak Inverse Voltage (PIV)
 Each diode in the bridge must withstand a reverse blocking voltage of:
-$$\text{"PIV"} \ge V_m$$
+$$\text{PIV} \ge V_m$$
 
 ## Hardware Bill of Materials (BOM)
 | Component | Function |
 | :--- | :--- |
 | **Step-Down Transformer** | 220V to 12V AC isolation and step-down |
 | **1N4007 Diodes (x4)** | Solid-state P-N junction bridge rectification |
-| **Electrolytic Capacitors** | Bulk charge storage / Passive filtering (e.g. $1000\mu\text{"F"}$) |
+| **Electrolytic Capacitors** | Bulk charge storage / Passive filtering (e.g. $1000\mu\text{F}$) |
 | **Power Resistors** | Dummy load for testing ripple under current draw ($R_L$) |
 
 ## Repository Layout Tree
@@ -76,8 +76,8 @@ $$\text{"PIV"} \ge V_m$$
 
 ## Laboratory Testing & Waveform Analysis
 The physical prototype was verified using an oscilloscope. The testing phases consisted of:
-1. **Unfiltered Observation**: Probing the output of the diode bridge without the capacitor installed. The trace reveals a raw, pulsating $100\text{"Hz"}$ DC wave touching 0V every 10ms.
-2. **Capacitive Filtering**: Upon inserting the bulk electrolytic capacitor in parallel with the load, the oscilloscope trace flattens, demonstrating the theoretical $V_{"dc,filtered"}$ with a small triangular ripple $V_{"r(p-p)"}$ riding on top as the capacitor discharges into the load resistor between AC cycles.
+1. **Unfiltered Observation**: Probing the output of the diode bridge without the capacitor installed. The trace reveals a raw, pulsating $100\text{Hz}$ DC wave touching 0V every 10ms.
+2. **Capacitive Filtering**: Upon inserting the bulk electrolytic capacitor in parallel with the load, the oscilloscope trace flattens, demonstrating the theoretical $V_{dc,filtered}$ with a small triangular ripple $V_{r(p-p)}$ riding on top as the capacitor discharges into the load resistor between AC cycles.
 
 ## Authentic Media Catalog
 - **Engineering Report**: [`docs/Conversion from  (AC) to (DC)حسن  مقبل .pdf`](docs/)
@@ -85,7 +85,7 @@ The physical prototype was verified using an oscilloscope. The testing phases co
 - **Bench Test Videos**: Original video clips (up to 85MB) are preserved locally in `media/videos/` as `[ORIGINAL HARDWARE TEST VIDEOS]`.
 
 ## Engineering Audit & Design Tradeoffs
-- **Full-Wave Bridge vs. Center-Tapped Transformer**: This design utilizes a 4-diode bridge rather than a 2-diode center-tapped transformer. The bridge topology requires a cheaper, simpler transformer with only two secondary wire leads and allows for a diode PIV rating of only $V_m$ (instead of $2V_m$). The tradeoff is a higher forward voltage drop ($1.4\text{"V"}$ vs $0.7\text{"V"}$), slightly reducing the final $V_{"peak"}$.
+- **Full-Wave Bridge vs. Center-Tapped Transformer**: This design utilizes a 4-diode bridge rather than a 2-diode center-tapped transformer. The bridge topology requires a cheaper, simpler transformer with only two secondary wire leads and allows for a diode PIV rating of only $V_m$ (instead of $2V_m$). The tradeoff is a higher forward voltage drop ($1.4\text{V}$ vs $0.7\text{V}$), slightly reducing the final $V_{peak}$.
 - **Passive Filtering vs. Active Regulation**: This project stops at passive capacitive filtering. While acceptable for basic DC motors or resistive heating elements, the output voltage will sag under heavy load variations and grid fluctuations. For sensitive electronics, an active Linear Regulator (e.g., LM317 or 7812) or SMPS topology must be cascaded after this filtering stage.
 
 ---
@@ -95,4 +95,4 @@ Mechatronics Engineer | Mechanical Design & CAD (SolidWorks & AutoCAD) | Prevent
 [GitHub](https://github.com/Hassan-Moqbel) · [Facebook](https://www.facebook.com/share/1BqxAgVjHi/) · [LinkedIn](https://www.linkedin.com/in/hassan-moqbel)
 
 ## License
-This project is licensed under the ["MIT License"](LICENSE).
+This project is licensed under the [MIT License](LICENSE).
